@@ -7,16 +7,16 @@ import io.crative.bullethell.entities.Player;
 /**
  * Game
  */
-public class Game implements Runnable{
-    private Thread gameThread; 
-    private GamePanel gamePanel; 
+public class Game implements Runnable {
+    private Thread gameThread;
+    private GamePanel gamePanel;
     private GameFrame gameFrame;
     private int FPS_SET = 120;
     private int UPS_SET = 200;
 
     private Player player;
 
-    public Game(){
+    public Game() {
         System.out.println("Starting game ...[2]");
         gamePanel = new GamePanel(this);
         gameFrame = new GameFrame(gamePanel);
@@ -28,25 +28,25 @@ public class Game implements Runnable{
         startGameThread();
     }
 
-    private void initClasses(){
+    private void initClasses() {
         this.player = new Player(200, 20, 1, 1);
     }
 
-    private void startGameThread(){
+    private void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
     }
 
     public void windowFocusLost() {
         // if(GameState.state == GameState.PLAYING)
-        //    playing.getPlayer().resetDirBooleans();
+        // playing.getPlayer().resetDirBooleans();
     }
 
-    public void update(){
+    public void update() {
         // Update different things
     }
 
-    public void render(Graphics g){ 
+    public void render(Graphics g) {
         player.render(g);
     }
 
@@ -66,26 +66,26 @@ public class Game implements Runnable{
         double deltaU = 0;
         double deltaF = 0;
 
-        while(true){
+        while (true) {
             long currentTime = System.nanoTime();
 
             deltaU += (currentTime - previousTime) / timePerUpdate;
             deltaF += (currentTime - previousTime) / timePerFrame;
             previousTime = currentTime;
 
-            if(deltaU >= 1){
+            if (deltaU >= 1) {
                 update();
-                updates ++;
-                deltaU --;
+                updates++;
+                deltaU--;
             }
 
-            if(deltaF >= 1){
+            if (deltaF >= 1) {
                 gamePanel.repaint();
-                frames ++;
-                deltaF --;
+                frames++;
+                deltaF--;
             }
 
-            if(System.currentTimeMillis() - lastCheck >= 1000) {
+            if (System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();
                 System.out.println("FPS: " + frames + " | UPS: " + updates);
                 frames = 0;
@@ -93,5 +93,5 @@ public class Game implements Runnable{
             }
         }
     }
-   
+
 }
