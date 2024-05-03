@@ -94,4 +94,9 @@ public class Game implements Runnable {
         }
     }
 
+    // Getters and Setters
+    public Player getPlayer(){
+        return player;
+    }
+
 }
