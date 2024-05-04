@@ -11,28 +11,28 @@ import static io.crative.bullethell.utilz.LoadSave.PLAYER_ATLAS;
  * Player
  */
 public class Player extends Entity{
-    private BufferedImage img;
+    private BufferedImage playerImg;
 
-    public Player(int x, int y, int width, int height){
-        super(x, y, width, height);
+    public Player(int xPos, int yPos, int width, int height){
+        super(xPos, yPos, width, height);
         loadImages();
     }
 
     private void loadImages(){
-        img = LoadSave._loadImage(PLAYER_ATLAS);
+        playerImg = LoadSave._loadImage(PLAYER_ATLAS);
     }
        
     public void render(Graphics g){
-        BufferedImage sub = img.getSubimage(0, 0, 16, 16);
-        g.drawImage(sub, x, y, null);
+        BufferedImage sub = playerImg.getSubimage(0, 0, 16, 16);
+        g.drawImage(sub, xPos, yPos, null);
     }
     
     // Getters and Setters
     public void setX(int x){
-        this.x += x;
+        this.xPos += x;
     }
     public void setY(int y){
-        this.y = y;
+        this.yPos = y;
     }
 
 }
