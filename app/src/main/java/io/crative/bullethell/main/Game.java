@@ -8,23 +8,33 @@ import io.crative.bullethell.entities.Player;
  * Game
  */
 public class Game implements Runnable {
+    // Static variables
+    public static float SCALE = 1.0f;
+    public static int GAME_WIDTH = (int)(1920 * SCALE);
+    public static int GAME_HEIGHT = (int)(1080*SCALE);
+
+    // Classes
     private Thread gameThread;
     private GamePanel gamePanel;
     private GameFrame gameFrame;
+    private Player player;
+    
+    // private variables
     private int FPS_SET = 120;
     private int UPS_SET = 200;
 
-    private Player player;
 
     public Game() {
         System.out.println("Starting game ...[2]");
+        // Initializing Window
         gamePanel = new GamePanel(this);
         gameFrame = new GameFrame(gamePanel);
         gamePanel.requestFocus();
 
+        // Initializing other Classes
         initClasses();
 
-        // ! you shall not pass
+        // you shall not pass
         startGameThread();
     }
 
@@ -33,6 +43,7 @@ public class Game implements Runnable {
     }
 
     private void startGameThread() {
+        // Starting new thread for the game/update process
         gameThread = new Thread(this);
         gameThread.start();
     }
@@ -63,9 +74,11 @@ public class Game implements Runnable {
         int updates = 0;
         long lastCheck = System.currentTimeMillis();
 
+        // delta updates and frames
         double deltaU = 0;
         double deltaF = 0;
 
+        // Game loop
         while (true) {
             long currentTime = System.nanoTime();
 
